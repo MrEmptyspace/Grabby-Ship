@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody myRigidbody;
     private Vector3 moveInput;
     private Vector3 moveVelocity;
-
+    public Plane groundPlane;
     private Camera mainCamera;
 
     // Start is called before the first frame update
@@ -30,16 +30,15 @@ public class PlayerController : MonoBehaviour
         moveVelocity = moveInput * moveSpeed;
 
         Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-        float rayLength;
+        Debug.DrawRay(cameraRay.origin,Vector3.forward,Color.red);
 
-        if (groundPlane.Raycast(cameraRay, out rayLength))
+        RaycastHit hit;
+        if (Physics.Raycast(cameraRay, out hit,30))
         {
-            Vector3 pointToLook = cameraRay.GetPoint(rayLength);
-            Debug.DrawLine(cameraRay.origin, pointToLook, Color.blue);
-
+            Vector3 pointToLook = cameraRay.GetPoint(hit.distance);
+            Debug.DrawLine(cameraRay.origin, pointToLook, Color.green);
             transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
-        }
+        }          
     }
 
     void FixedUpdate()
