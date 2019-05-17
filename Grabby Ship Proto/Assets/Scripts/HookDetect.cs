@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class HookDetect : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject player;
+    private void OnTriggerEnter(Collider other)
     {
-        
-    }
+        if(other.tag == "Hookable")
+        {
+            player.GetComponent<GrapplingHook>().hookAttached = true;
+            player.GetComponent<GrapplingHook>().hookedObj = other.gameObject;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        }
     }
 }

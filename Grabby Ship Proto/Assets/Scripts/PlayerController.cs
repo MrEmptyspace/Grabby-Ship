@@ -38,12 +38,13 @@ public class PlayerController : MonoBehaviour
             Vector3 pointToLook = cameraRay.GetPoint(hit.distance);
             Debug.DrawLine(cameraRay.origin, pointToLook, Color.green);
             transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
-        }          
+        }
+
+        myRigidbody.velocity = moveVelocity;
     }
 
-    void FixedUpdate()
-    {
-        myRigidbody.velocity = moveVelocity;
-        //myRigidbody
-    }
+    //void FixedUpdate()
+    //{   
+    //    //myRigidbody
+    //}
 }
